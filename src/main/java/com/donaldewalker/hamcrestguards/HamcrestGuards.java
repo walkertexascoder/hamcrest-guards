@@ -1,16 +1,16 @@
-package com.swacorp.bservices.mona;
+package com.donaldewalker.hamcrestguards;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 /**
- * Some tools to help in validations, primarily method guards.
+ * Guards utilizing Hamcrest Matchers.
  * 
- * @author "Don Walker (x2517)"
+ * @author "Don Walker (don@donaldewalker.com)"
  *
  */
-public class ValidationUtils
+public class HamcrestGuards
 {
    /**
     * Throw an IllegalArgumentException unless obj is matched by matcher.
@@ -44,11 +44,15 @@ public class ValidationUtils
 		{
 			throw new IllegalArgumentException("matcher may not be null");
 		}
+		if (objName == null)
+		{
+			throw new IllegalArgumentException("object name may not be null");
+		}
 	
       if (! matcher.matches(obj))
       {
          Description failureDescription = new StringDescription();
-         matcher.describeMismatch(obj, failureDescription);
+//         matcher.describeMismatch(obj, failureDescription);
          throw new IllegalArgumentException(buildExceptionText(objName, failureDescription));
       }
    }

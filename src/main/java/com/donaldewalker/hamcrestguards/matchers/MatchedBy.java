@@ -1,12 +1,18 @@
-package com.swacorp.bservices.mona;
-
-import static com.swacorp.bservices.mona.CollectionUtil.append;
+package com.donaldewalker.hamcrestguards.matchers;
 
 import java.util.regex.Pattern;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Hamcrest matcher that verifies a string matches a given
+ * regular expression. Supports all regular expression supported
+ * by the Java core library.
+ * 
+ * @author "Don Walker (don@donaldewalker.com)"
+ *
+ */
 public class MatchedBy extends TypeSafeMatcher<String>
 {
    private Pattern pattern;
@@ -22,7 +28,7 @@ public class MatchedBy extends TypeSafeMatcher<String>
    }
    
    @Override
-   protected boolean matchesSafely(String item)
+   public boolean matchesSafely(String item)
    {
       return getPattern().matcher(item).matches();
    }
@@ -30,15 +36,6 @@ public class MatchedBy extends TypeSafeMatcher<String>
    public void describeTo(Description description)
    {
       description.appendText("string matching ").appendValue(pattern);
-   }
-   
-   @Override
-   protected void describeMismatchSafely(String item, Description mismatchDescription)
-   {
-      mismatchDescription
-         .appendValue(item)
-         .appendText(" does not match ")
-         .appendValue(getPattern());
    }
    
    private void setPattern(Pattern pattern)
