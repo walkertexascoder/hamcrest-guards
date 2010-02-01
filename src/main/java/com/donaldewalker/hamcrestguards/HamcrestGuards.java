@@ -1,5 +1,8 @@
 package com.donaldewalker.hamcrestguards;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
@@ -21,7 +24,7 @@ public class HamcrestGuards {
     * @param matcher
     */
    public static void requireThat(Object obj, Matcher<?> matcher) {
-      requireThat(obj, "", matcher);
+      requireThat(obj, null, matcher);
    }
 
    /**
@@ -40,14 +43,11 @@ public class HamcrestGuards {
       if (matcher == null) {
          throw new IllegalArgumentException("matcher may not be null");
       }
-      if (objName == null) {
-         throw new IllegalArgumentException("object name may not be null");
-      }
-
+      
       if (! matcher.matches(obj)) {
          Description failureDescription = new StringDescription();
-         // matcher.describeMismatch(obj, failureDescription);
-         throw new IllegalArgumentException(buildExceptionText(objName, failureDescription));
+         matcher.describeMismatch(obj, failureDescription);
+         throw new IllegalArgumentException(buildExceptionText(objName, matcher, failureDescription));
       }
    }
 
@@ -57,8 +57,12 @@ public class HamcrestGuards {
     * @return text including the object name, if provided, otherwise just the
     *         failure description
     */
-   private static String buildExceptionText(String objName, Description failureDescription) {
-      return objName + " " + failureDescription; // Not really heavy enough for
-                                                 // StringBuilder
+   private static String buildExceptionText(String objName, Matcher<?> matcher, Description failureDescription) {
+      // Not really heavy enough for StringBuilder
+      return (objName != null ? objName : "value") + " " + failureDescription + ", but expected " + matcher;
+   }
+   
+   public static void main(String[] args) {
+      requireThat(null, is(notNullValue()));
    }
 }

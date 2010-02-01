@@ -34,6 +34,17 @@ public class HamcrestGuardsTest {
          assertThat(e.getMessage(), startsWith("alazar"));
       }
    }
+   
+   @Test
+   public void should_use_term__value__if_no_object_name_provided() throws Exception {
+      try {
+         requireThat(null, is(notNullValue()));
+         fail("Expected illegal argument exception");
+      }
+      catch (IllegalArgumentException e) {
+         assertThat(e.getMessage(), startsWith("value"));
+      }
+   }
 
    @Test
    public void should_throw_illegal_argument_exception_if_matcher_is_null() throws Exception {
@@ -43,17 +54,6 @@ public class HamcrestGuardsTest {
       }
       catch (IllegalArgumentException e) {
          assertThat(e.getMessage(), is("matcher may not be null"));
-      }
-   }
-
-   @Test
-   public void should_throw_illegal_argument_exception_if_object_name_is_null() throws Exception {
-      try {
-         requireThat(null, null, is(nullValue()));
-         fail("Expected illegal argument exception");
-      }
-      catch (IllegalArgumentException e) {
-         assertThat(e.getMessage(), is("object name may not be null"));
       }
    }
 }
