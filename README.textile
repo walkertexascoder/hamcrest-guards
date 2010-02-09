@@ -46,15 +46,11 @@ h2. Examples
 	requireThat("red data", is(matchedBy("(gold|green) data")));
 	// -> java.lang.IllegalArgumentException: 
 	//        Expected value to be a string matching <(gold|green) data> but was "red data".
-</pre>
 
-<pre>
 	// You can provide value names that are included in the exception detail message.
 	requireThat(null, "essential widget" is(notNullValue()));
 	// -> java.lang.IllegalArgumentException: Expected essential widget to not be null but was null.
-</pre>
 
-<pre>
 	// You can specify any RuntimeException to be thrown; by default IllegalArgumentException is used.
 	requireThat("", "employee first name", is(not(emptyString())), elseThrow(IllegalStateException.class));
 	// -> java.lang.IllegalStateException: Expected employee first name to not be a blank string but was "".
