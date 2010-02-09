@@ -8,15 +8,18 @@ import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
 
+/**
+ * @author Don Walker (don@walkertexascoder.com)
+ */
 public class MatchedByTest {
    @Test
-   public void should_throw_an_illegal_argument_exception_if_a_null_matcher_is_provided_to_constructor() throws Exception {
+   public void should_throw_an_illegal_argument_exception_if_initialized_with_a_null_regular_expression() throws Exception {
       try {
          new MatchedBy(null);
          fail("expected an illegal argument exception");
       }
       catch (IllegalArgumentException e) {
-         assertThat(e.getMessage(), is("regular expression was null, but expected is not null"));
+         assertThat(e.getMessage(), is("Expected regular expression to not be null but was null."));
       }
    }
    

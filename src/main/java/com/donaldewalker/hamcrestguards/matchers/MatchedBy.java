@@ -10,10 +10,10 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Hamcrest matcher that verifies a string matches a given regular expression.
+ * Hamcrest Matcher that verifies a string matches a given regular expression.
  * Supports all regular expressions supported by the Java core library.
  * 
- * @author "Don Walker (don@donaldewalker.com)"
+ * @author Don Walker (don@walkertexascoder.com)
  */
 public class MatchedBy extends TypeSafeMatcher<String> {
    private Pattern pattern;
@@ -27,23 +27,13 @@ public class MatchedBy extends TypeSafeMatcher<String> {
       setPattern(Pattern.compile(regex));
    }
 
-   /**
-    * Syntactically sweet factory method.
-    * 
-    * @param regex
-    * @return matcher instance initialized with regex
-    */
-   public static MatchedBy matchedBy(String regex) {
-      return new MatchedBy(regex);
-   }
-
    @Override
    public boolean matchesSafely(String item) {
       return getPattern().matcher(item).matches();
    }
 
    public void describeTo(Description description) {
-      description.appendText("string matching ").appendValue(pattern);
+      description.appendText("a string matching ").appendValue(pattern);
    }
 
    private void setPattern(Pattern pattern) {
