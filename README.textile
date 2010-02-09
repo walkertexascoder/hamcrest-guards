@@ -18,7 +18,7 @@ A lot of Java guards look like these:
 	}
 </pre>
 	
-If I could tell you the very same functionality is provided by the following, would that be something you might be interested in?
+Hamcrest Guards lets you achive the very same functionality with these:
 
 <pre>
 	requireThat(someValue, is(notNull()));
@@ -44,7 +44,8 @@ h2. Examples
 <pre>
 	// Exception detail messages are very informative.
 	requireThat("red data", is(matchedBy("(gold|green) data")));
-	// -> java.lang.IllegalArgumentException: Expected value to be a string matching <(gold|green) data> but was "red data".
+	// -> java.lang.IllegalArgumentException: 
+   //       Expected value to be a string matching <(gold|green) data> but was "red data".
 </pre>
 
 <pre>
