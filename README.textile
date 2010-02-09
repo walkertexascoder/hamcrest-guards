@@ -26,7 +26,7 @@ Hamcrest Guards lets you achive the very same functionality with these:
 	requireThat(someStringArray, hasArraySize(5), elseThrow(IllegalStateException.class));
 </pre>
 	
-This is the goal of Hamcrest Guards. The advantages of this approach are clear:
+There are several advantages of to this approach:
 # The condition guarded against and the error message are specified one time only. In the first approach the two are separate and may diverge over time and cause a lot of confusion.
 # Consistent and informative error messages assist in diagnosing problems faster.
 # Ease of writing encourages the developer to actually employ method guards.
