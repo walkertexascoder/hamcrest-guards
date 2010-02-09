@@ -21,13 +21,13 @@ A lot of Java guards look like these:
 Hamcrest Guards lets you achive the very same functionality with these:
 
 <pre>
-	requireThat(someValue, is(notNull()));
+	requireThat(someValue, is(notNullValue()));
 	requireThat(someString, is(not(emptyString())));	
 	requireThat(someStringArray, hasArraySize(5), elseThrow(IllegalStateException.class));
 </pre>
 	
-There are several advantages of to this approach:
-# The condition guarded against and the error message are specified one time only. In the first approach the two are separate and may diverge over time and cause a lot of confusion.
+There are several advantages to this approach:
+# The condition guarded against and the error message are specified once in the same code (e.g. is(notNullValue())). In the first approach the two are separate and may diverge over time and cause a lot of confusion (e.g. sameStringArray length check is changed to 4 but error message remains 5).
 # Consistent and informative error messages assist in diagnosing problems faster.
 # Ease of writing encourages the developer to actually employ method guards.
 # Declarative guards are more readable than those performed procedurally.
