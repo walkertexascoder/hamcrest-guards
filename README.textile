@@ -33,7 +33,7 @@ There are several advantages to this approach:
 # Declarative guards are more readable than those performed procedurally.
 # Smaller amounts of readable code means fewer places to make mistakes and a lower chance of making them.
 
-If you haven't heard of Hamcrest Matchers before but recognize them from somwher it's probably because they've been packaged with JUnit since version 4.0:
+If you haven't heard of Hamcrest Matchers before but recognize them from somewhere it's probably because they've been packaged with JUnit since version 4.0:
 
 <pre>
 	assertThat(newArrayList("A", "B"), hasSize(2));
