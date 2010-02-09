@@ -37,6 +37,6 @@ public class MatchedByTest {
    public void should_provide_regular_expression_being_matched_in_the_description() throws Exception {
       Description description = new StringDescription();
       new MatchedBy("abc").describeTo(description);
-      assertThat(description.toString(), is("string matching <abc>"));
+      assertThat(description.toString(), is("a string matching <abc>"));
    }
 }
