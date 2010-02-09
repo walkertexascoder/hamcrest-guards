@@ -1,0 +1,74 @@
+h1. Hamcrest Guards
+
+A simple utility for writing guards using Hamcrest Matchers.
+
+h2. Motivation
+
+A lot of Java guards look like these:
+
+<pre>
+	if (someValue == null) {
+		throw new IllegalArgumentException("same value was null");
+	}
+	if (StringUtils.isEmpty(someString)) {
+		throw new IllegalArgumentException("some string was empty")
+	}
+	if (someStringArray == null || someStringArray.length < 5) {
+		throw new IllegalStateException("some string array was less than 5 elements`");
+	}
+</pre>
+	
+If I could tell you the very same functionality is provided by the following, would that be something you might be interested in?
+
+<pre>
+	requireThat(someValue, is(notNull()));
+	requireThat(someString, is(not(emptyString())));	
+	requireThat(someStringArray, hasArraySize(5), elseThrow(IllegalStateException.class));
+</pre>
+	
+This is the goal of Hamcrest Guards. The advantages of this approach are clear:
+# The condition guarded against and the error message are specified one time only. In the first approach the two are separate and may diverge over time and cause a lot of confusion.
+# Consistent and informative error messages assist in diagnosing problems faster.
+# Ease of use encourages the developer to write method guards.
+# Declarative guards are more readable than those performed procedurally.
+# Less code and fewer places to make mistakes.
+
+If you haven't used Hamcrest Matchers before but think that they look familiar it's because they have been included in JUnit since 4.x so that you can write assertions like so:
+
+<pre>
+	assertThat(newArrayList("A", "B"), hasSize(2));
+</pre>
+
+h2. Examples
+
+<pre>
+	// Exception detail messages are very informative.
+	requireThat("red data", is(matchedBy("(gold|green) data")));
+	// -> java.lang.IllegalArgumentException: Expected value to be a string matching <(gold|green) data> but was "red data".
+</pre>
+
+<pre>
+	// You can provide value names that are included in the exception detail message.
+	requireThat(null, "essential widget" is(notNullValue()));
+	// -> java.lang.IllegalArgumentException: Expected essential widget to not be null but was null.
+</pre>
+
+<pre>
+	// You can specify any RuntimeException to be thrown; by default IllegalArgumentException is used.
+	requireThat("", "employee first name", is(not(emptyString())), elseThrow(IllegalStateException.class));
+	// -> java.lang.IllegalStateException: Expected employee first name to not be a blank string but was "".
+</pre>
+
+h2. How To Use
+
+Download the source via the "Download Source" near the top of the page. Hamcrest Guards is developed using Maven, but you're free to use it however you wish. Since much of the syntactic sugar is made possible via static imports you'll probably want to add <tt>com.hamcrest.Matchers</tt>, <tt>com.walkertexascoder.hamcrestguards.Guard</tt> and <tt>com.walkertexascoder.hamcrestguards.matchers.HamcrestMatchers</tt> to whatever you IDE requires to locate them automatically.
+
+There are a _lot_ of Hamcrest Matchers already at your disposal that deal with collection contents, object properties, XPaths, and so on. For an overview see <tt>org.hamcrest.Matchers</tt>.
+
+It is also very easy to add domain-specific matchers that can add a lot of expressibility and reduce the LOC of your code base. Look in the <tt>com.walkertexascoder.hamcrestguards.matchers</tt> package for examples.
+
+h2. Next Steps
+
+* A lot of Hamcrest Matcher's descriptions are really awkward when used in this context, so it'd be nice to do some work on them. Instead of attempting to duplicate the classes I'm taking the approach of modifying the description String after it is generated.
+* It'd be very nice to excise the part of the stack trace after the point where the guard exists, it's just noise the client won't care about.
+* Add an elegant way for arbitrary detail to be added to the exception detail message.
