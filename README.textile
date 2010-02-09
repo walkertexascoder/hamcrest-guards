@@ -62,7 +62,7 @@ h2. Examples
 
 h2. How To Use
 
-Download the source via the "Download Source" near the top of the page. Hamcrest Guards is developed using Maven, but you're free to use it however you wish. Since much of the syntactic sugar is made possible via static imports you'll probably want to add <tt>com.hamcrest.Matchers</tt>, <tt>com.walkertexascoder.hamcrestguards.Guard</tt> and <tt>com.walkertexascoder.hamcrestguards.matchers.HamcrestMatchers</tt> to whatever you IDE requires to locate them automatically.
+Download the source via the "Download Source" near the top of the page. Hamcrest Guards is developed using Maven, but you're free to use it however you wish. Since much of the syntactic sugar is made possible via static imports you'll probably want to add <tt>com.hamcrest.Matchers</tt>, <tt>com.walkertexascoder.hamcrestguards.Guard</tt> and <tt>com.walkertexascoder.hamcrestguards.matchers.HamcrestMatchers</tt> to whatever your IDE requires to locate them automatically(e.g. Contest Assist - Favorites in Eclipse).
 
 There are a _lot_ of Hamcrest Matchers already at your disposal that deal with collection contents, object properties, XPaths, and so on. For an overview see <tt>org.hamcrest.Matchers</tt>.
 
