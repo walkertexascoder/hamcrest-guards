@@ -1,4 +1,4 @@
-package com.donaldewalker.hamcrestguards.matchers;
+package com.walkertexascoder.hamcrestguards.matchers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

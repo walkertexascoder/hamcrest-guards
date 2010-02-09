@@ -1,6 +1,6 @@
-package com.donaldewalker.hamcrestguards;
+package com.walkertexascoder.hamcrestguards;
 
-import static com.donaldewalker.hamcrestguards.HamcrestGuards.requireThat;
+import static com.walkertexascoder.hamcrestguards.HamcrestGuards.requireThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;

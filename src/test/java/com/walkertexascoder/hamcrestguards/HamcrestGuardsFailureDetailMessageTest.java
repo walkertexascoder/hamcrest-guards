@@ -1,12 +1,12 @@
-package com.donaldewalker.hamcrestguards;
+package com.walkertexascoder.hamcrestguards;
 
-import static com.donaldewalker.hamcrestguards.HamcrestGuards.requireThat;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.alphabeticalString;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.blankString;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.emptyString;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.matchedBy;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.numericalString;
-import static com.donaldewalker.hamcrestguards.matchers.HamcrestGuardMatchers.whitespaceString;
+import static com.walkertexascoder.hamcrestguards.HamcrestGuards.requireThat;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.alphabeticalString;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.blankString;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.emptyString;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.matchedBy;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.numericalString;
+import static com.walkertexascoder.hamcrestguards.matchers.HamcrestGuardMatchers.whitespaceString;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.containsInAnyOrder;

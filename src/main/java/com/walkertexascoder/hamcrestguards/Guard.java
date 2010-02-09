@@ -1,4 +1,4 @@
-package com.donaldewalker.hamcrestguards;
+package com.walkertexascoder.hamcrestguards;
 
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.hamcrest.Description;

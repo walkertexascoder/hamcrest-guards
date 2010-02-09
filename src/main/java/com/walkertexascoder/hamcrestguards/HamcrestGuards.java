@@ -1,4 +1,4 @@
-package com.donaldewalker.hamcrestguards;
+package com.walkertexascoder.hamcrestguards;
 
 import org.hamcrest.Matcher;
 
