@@ -1,68 +1,97 @@
 package com.donaldewalker.hamcrestguards;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
 
 /**
  * Guards utilizing Hamcrest Matchers.
  * 
- * @author "Don Walker (don@donaldewalker.com)"
+ * <pre>
+ *    requireThat("some value", is(notNullValue()));
+ *    // throw new IllegalArgumentException("Expected some value to not be null but was null");
+ * </pre>
+ * 
+ * <pre>
+ *    requireThat("some state", is(nullValue()), elseThrow(IllegalStateException.class));
+ *    // throw new IllegalStateException("Expected some state to be null but was not null");
+ * </pre>
+ * 
+ * @author Don Walker (don@walkertexascoder.com)
  */
 public class HamcrestGuards {
+   private static final String DEFAULT_VALUE_NAME = "value";
+   
    /**
-    * Throw an IllegalArgumentException unless obj is matched by matcher. 
+    * Throw an IllegalArgumentException unless the value satisfies the matcher. 
     * 
-    * <code>
-    *    requireThat(someMethodArg, is(notNullValue()));
-    * </code>
+    * <pre>
+    *    requireThat(someMethodParameter, is(notNullValue()));
+    * </pre>
     * 
-    * @param obj
+    * @param value
     * @param matcher
     */
-   public static void requireThat(Object obj, Matcher<?> matcher) {
-      requireThat(obj, null, matcher);
+   public static void requireThat(Object value, Matcher<?> matcher) {
+      requireThat(value, DEFAULT_VALUE_NAME, matcher);
    }
 
    /**
-    * Throw an IllegalArgumentException unless obj is matched by matcher. 
+    * Throw a runtime exception of exception type unless value satisfies the matcher.
     * 
-    * <code>
-    *    requireThat(someMethodArg, "essential value", is(notNullValue()));
-    * </code>
+    * <pre>
+    *    requireThat(someState, is(notNullValue()), IllegalStateException.class);
+    * </pre>
     * 
-    * @param obj
-    * @param objName contextual name of the object used in the exception text if
+    * @param value
+    * @param matcher
+    * @param exceptionType
+    */
+   public static void requireThat(Object value, Matcher<?> matcher, Class<? extends RuntimeException> exceptionType) {
+      requireThat(value, DEFAULT_VALUE_NAME, matcher, exceptionType);
+   }
+   
+   /**
+    * Throw an IllegalArgumentException unless the value satisfies the matcher.
+    * 
+    * <pre>
+    *    requireThat(someMethodParameter, "essential value", is(notNullValue()));
+    * </pre>
+    * 
+    * @param value
+    * @param valueName contextual name of the object used in the exception text if
     *        matching fails
     * @param matcher
     */
-   public static void requireThat(Object obj, String objName, Matcher<?> matcher) {
-      if (matcher == null) {
-         throw new IllegalArgumentException("matcher may not be null");
-      }
-      
-      if (! matcher.matches(obj)) {
-         Description failureDescription = new StringDescription();
-         matcher.describeMismatch(obj, failureDescription);
-         throw new IllegalArgumentException(buildExceptionText(objName, matcher, failureDescription));
-      }
+   public static void requireThat(Object value, String valueName, Matcher<?> matcher) {
+      new Guard(valueName, matcher).frisk(value);
    }
 
    /**
-    * @param objName
-    * @param failureDescription
-    * @return text including the object name, if provided, otherwise just the
-    *         failure description
+    * Throw a runtime exception of exception type unless the value satisfies the matcher.
+    * 
+    * <pre>
+    *    requireThat(someState, "essential state", is(notNullValue()), IllegalStateException.class);
+    * </pre>
+    * 
+    * @param value
+    * @param valueName
+    * @param matcher
+    * @param exceptionType
     */
-   private static String buildExceptionText(String objName, Matcher<?> matcher, Description failureDescription) {
-      // Not really heavy enough for StringBuilder
-      return (objName != null ? objName : "value") + " " + failureDescription + ", but expected " + matcher;
+   public static void requireThat(Object value, String valueName, Matcher<?> matcher, Class<? extends RuntimeException> exceptionType) {
+      new Guard(valueName, matcher, exceptionType).frisk(value);
    }
    
-   public static void main(String[] args) {
-      requireThat(null, is(notNullValue()));
+   /**
+    * Syntactic sugar for scenarios where an explicit runtime exception type is specified.
+    * 
+    * <pre>
+    *    requireThat(someState, is(nullValue()), elseThrow(IllegalStateException.class));
+    * </pre>
+    * 
+    * @param exceptionType
+    * @return exceptionType
+    */
+   public static Class<? extends RuntimeException> elseThrow(Class<? extends RuntimeException> exceptionType) {
+      return exceptionType;
    }
-}
+}   
