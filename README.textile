@@ -31,7 +31,7 @@ This is the goal of Hamcrest Guards. The advantages of this approach are clear:
 # Consistent and informative error messages assist in diagnosing problems faster.
 # Ease of writing encourages the developer to actually employ method guards.
 # Declarative guards are more readable than those performed procedurally.
-# Smaller amounts of readable code and fewer places to make mistakes.
+# Smaller amounts of readable code means fewer places to make mistakes and a lower chance of making them.
 
 If you haven't used Hamcrest Matchers before but think that they look familiar it's because they have been included in JUnit since 4.x so that you can write assertions like so:
 
