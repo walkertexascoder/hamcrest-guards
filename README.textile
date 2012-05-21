@@ -13,7 +13,7 @@ A lot of Java guards look like these:
 	if (StringUtils.isEmpty(someString)) {
 		throw new IllegalArgumentException("some string was empty")
 	}
-	if (someStringArray == null || someStringArray.length < 5) {
+	if (someStringArray == null || someStringArray.length != 5) {
 		throw new IllegalStateException("some string array was less than 5 elements`");
 	}
 </pre>
